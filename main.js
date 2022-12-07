@@ -97,6 +97,13 @@ console.log(bottons);
 
 // Ogni volta che premi un pulsante like devi aggiungere 1 al numero di like di quel pulsante di quel determinato post
 
+bottons.forEach( (button, index) => {
+    button.addEventListener('click', function() {
+        if (index === posts[index].id){
+            posts[index].likes++;
+        }
+    });
+});
 
 
 function getNewElement (element, className) {
