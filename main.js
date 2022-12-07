@@ -55,3 +55,36 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+const container = document.getElementById('container');
+
+// posts.forEach ((post, index) => {
+
+// });
+
+const postContainer = getNewElement ('div', 'post');
+container.appendChild(postContainer);
+
+const postHeader = getNewElement ('div', 'post__header');
+postContainer.appendChild(postHeader);
+
+const postMeta = getNewElement ('div', 'post-meta');
+postHeader.appendChild(postMeta);
+
+const postMetaIcon = getNewElement ('div', 'post-meta__icon');
+postMeta.appendChild(postMetaIcon);
+
+const profilePic = getNewElement ('img', 'profile-pic');
+profilePic.src = `${posts[0].media}`;
+profilePic.innerHTML += `alt="${posts[0].author.name}"`;
+postMetaIcon.appendChild(profilePic);
+
+
+
+console.log(postContainer);
+
+function getNewElement (element, className) {
+    const newElement = document.createElement(element);
+    newElement.classList.add(className);
+    return newElement;
+}
