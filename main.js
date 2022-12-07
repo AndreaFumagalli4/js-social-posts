@@ -57,31 +57,58 @@ const posts = [
 ];
 
 const container = document.getElementById('container');
-
-// posts.forEach ((post, index) => {
-
-// });
-
 const postContainer = getNewElement ('div', 'post');
 container.appendChild(postContainer);
 
-const postHeader = getNewElement ('div', 'post__header');
-postContainer.appendChild(postHeader);
+posts.forEach ((post, index) => {
+    postContainer.innerHTML += `
+    <div class="post__header">
+        <div class="post-meta">                    
+            <div class="post-meta__icon">
+                <img class="profile-pic" src="${posts[index].media}" alt="${posts[index].author.name}">                    
+            </div>
+            <div class="post-meta__data">
+                <div class="post-meta__author">${posts[index].author.name}</div>
+                <div class="post-meta__time">${posts[index].created}</div>
+            </div>                    
+        </div>
+    </div>
+    <div class="post__text">${posts[index].content}</div>
+    <div class="post__image">
+        <img src="${posts[index].author.image}" alt="">
+    </div>
+    <div class="post__footer">
+        <div class="likes js-likes">
+            <div class="likes__cta">
+                <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                    <span class="like-button__label">Mi Piace</span>
+                </a>
+            </div>
+            <div class="likes__counter">
+                Piace a <b id="like-counter-1" class="js-likes-counter">${posts[index].likes}</b> persone
+            </div>
+        </div> 
+    </div>`;
+});
 
-const postMeta = getNewElement ('div', 'post-meta');
-postHeader.appendChild(postMeta);
-
-const postMetaIcon = getNewElement ('div', 'post-meta__icon');
-postMeta.appendChild(postMetaIcon);
-
-const profilePic = getNewElement ('img', 'profile-pic');
-profilePic.src = `${posts[0].media}`;
-profilePic.innerHTML += `alt="${posts[0].author.name}"`;
-postMetaIcon.appendChild(profilePic);
 
 
+// const postHeader = getNewElement ('div', 'post__header');
+// postContainer.appendChild(postHeader);
 
-console.log(postContainer);
+// const postMeta = getNewElement ('div', 'post-meta');
+// postHeader.appendChild(postMeta);
+
+// const postMetaIcon = getNewElement ('div', 'post-meta__icon');
+// postMeta.appendChild(postMetaIcon);
+
+// const profilePic = getNewElement ('img', 'profile-pic');
+// profilePic.src = `${posts[0].media}`;
+// profilePic.innerHTML += `alt="${posts[0].author.name}"`;
+// postMetaIcon.appendChild(profilePic);
+
+// console.log(postContainer);
 
 function getNewElement (element, className) {
     const newElement = document.createElement(element);
