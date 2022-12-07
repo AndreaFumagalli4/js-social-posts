@@ -57,58 +57,47 @@ const posts = [
 ];
 
 const container = document.getElementById('container');
-const postContainer = getNewElement ('div', 'post');
-container.appendChild(postContainer);
 
-posts.forEach ((post, index) => {
-    postContainer.innerHTML += `
-    <div class="post__header">
-        <div class="post-meta">                    
-            <div class="post-meta__icon">
-                <img class="profile-pic" src="${posts[index].media}" alt="${posts[index].author.name}">                    
+posts.forEach ((post) => {
+    container.innerHTML += `
+    <div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    <img class="profile-pic" src="${post.media}" alt="${post.author.name}">                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${post.author.name}</div>
+                    <div class="post-meta__time">${post.created}</div>
+                </div>                    
             </div>
-            <div class="post-meta__data">
-                <div class="post-meta__author">${posts[index].author.name}</div>
-                <div class="post-meta__time">${posts[index].created}</div>
-            </div>                    
         </div>
-    </div>
-    <div class="post__text">${posts[index].content}</div>
-    <div class="post__image">
-        <img src="${posts[index].author.image}" alt="">
-    </div>
-    <div class="post__footer">
-        <div class="likes js-likes">
-            <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
-                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                    <span class="like-button__label">Mi Piace</span>
-                </a>
-            </div>
-            <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${posts[index].likes}</b> persone
-            </div>
-        </div> 
+        <div class="post__text">${post.content}</div>
+        <div class="post__image">
+            <img src="${post.author.image}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone
+                </div>
+            </div> 
+        </div>
     </div>`;
 });
 
+const bottons = document.querySelectorAll('a.like-button.js-like-button');
+console.log(bottons);
+
+// Ogni volta che premi un pulsante like devi aggiungere 1 al numero di like di quel pulsante di quel determinato post
 
 
-// const postHeader = getNewElement ('div', 'post__header');
-// postContainer.appendChild(postHeader);
-
-// const postMeta = getNewElement ('div', 'post-meta');
-// postHeader.appendChild(postMeta);
-
-// const postMetaIcon = getNewElement ('div', 'post-meta__icon');
-// postMeta.appendChild(postMetaIcon);
-
-// const profilePic = getNewElement ('img', 'profile-pic');
-// profilePic.src = `${posts[0].media}`;
-// profilePic.innerHTML += `alt="${posts[0].author.name}"`;
-// postMetaIcon.appendChild(profilePic);
-
-// console.log(postContainer);
 
 function getNewElement (element, className) {
     const newElement = document.createElement(element);
