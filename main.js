@@ -102,7 +102,7 @@ console.log(likesCounter);
 
 bottons.forEach( (button) => {
     button.addEventListener('click', function() {
-        
+        console.warn(`Hai cliccato il bottone`);
     });
 });
 
