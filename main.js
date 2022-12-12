@@ -79,7 +79,7 @@ posts.forEach ((post) => {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" href="#" data-postid="${post.id}">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -92,23 +92,39 @@ posts.forEach ((post) => {
     </div>`;
 });
 
-const bottons = document.querySelectorAll('a.like-button.js-like-button');
-console.log(bottons);
+const likeButtons = document.querySelectorAll(`a.like-button`);
+const likesCounters = document.querySelectorAll(`b.js-likes-counter`);
 
-const likesCounter = document.querySelectorAll('b.js-likes-counter');
-console.log(likesCounter);
+const likedPosts = [];
 
-// Ogni volta che premi un pulsante like devi aggiungere 1 al numero di like di quel pulsante di quel determinato post
+for (let index = 0; index < likeButtons.length; index++) {
 
-bottons.forEach( (button) => {
-    button.addEventListener('click', function() {
-        console.warn(`Hai cliccato il bottone`);
+    const likeButton = likeButtons[index];
+    const likesCounter = likesCounters[index];
+
+    likeButton.addEventListener('click', function(event) {
+
+        event.preventDefault();
+        
+        if (likeButton.classList.contains('like-button--liked')) {
+
+            likeButton.classList.remove('like-button--liked');
+
+            likesCounter.innerHTML = parseInt(likesCounter.innerHTML, 10) - 1;
+
+            likedPosts.splice(likedPosts.indexOf(posts.id), 1);
+
+        }  else {
+
+            likeButton.classList.add('like-button--liked');
+
+            likesCounter.innerHTML = parseInt(likesCounter.innerHTML, 10) + 1;
+
+            likedPosts.push(posts.id);
+        }
+        console.log(likedPosts);
     });
-});
-
-
-function getNewElement (element, className) {
-    const newElement = document.createElement(element);
-    newElement.classList.add(className);
-    return newElement;
 }
+
+
+
